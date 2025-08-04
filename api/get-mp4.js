@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { stdout } = await execAsync(`./yt-dlp -j "${url}"`);
+    const { stdout } = await execAsync(`${__dirname}/yt-dlp -j "${url}"`);
     const json = JSON.parse(stdout);
 
     const httpFormats = json.formats.filter((f) =>
