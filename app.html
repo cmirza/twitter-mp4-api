@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Twitter MP4 Fetcher</title>
+</head>
+<body>
+  <h2>Fetching video...</h2>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const tweetUrl = params.get("url");
+
+    if (!tweetUrl) {
+      document.body.innerText = "Missing 'url' parameter.";
+    } else {
+      fetch("/api/get-mp4", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: tweetUrl })
+      })
+        .then(res => res.text())
+        .then(mp4Url => {
+          navigator.clipboard.writeText(mp4Url);
+          document.body.innerHTML = `<p>✅ Copied to clipboard:</p><a href="${mp4Url}" target="_blank">${mp4Url}</a>`;
+        })
+        .catch(err => {
+          document.body.innerText = "Error: " + err;
+        });
+    }
+  </script>
+</body>
+</html>
