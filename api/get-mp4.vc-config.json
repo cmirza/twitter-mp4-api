@@ -1,0 +1,6 @@
+{
+  "runtime": "nodejs18.x",
+  "handler": "get-mp4.js",
+  "launcherType": "Nodejs",
+  "includedFiles": ["api/yt-dlp"]
+}
