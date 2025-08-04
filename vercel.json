@@ -1,5 +1,7 @@
 {
-  "rewrites": [
-    { "source": "/app", "destination": "/app.html" }
-  ]
+  "functions": {
+    "api/get-mp4.js": {
+      "includedFiles": ["api/yt-dlp"]
+    }
+  }
 }
