@@ -10,9 +10,9 @@
     const tweetUrl = params.get("url");
 
     if (!tweetUrl) {
-      document.body.innerText = "Missing 'url' parameter.";
+      document.body.innerText = "Missing 'url' query param.";
     } else {
-      fetch("/api/get-mp4", {
+      fetch("/get-mp4", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: tweetUrl })
@@ -20,7 +20,13 @@
         .then(res => res.text())
         .then(mp4Url => {
           navigator.clipboard.writeText(mp4Url);
-          document.body.innerHTML = `<p>✅ Copied to clipboard:</p><a href="${mp4Url}" target="_blank">${mp4Url}</a>`;
+          document.body.innerHTML = `
+            <p>✅ MP4 copied to clipboard:</p>
+            <p><a href="${mp4Url}" target="_blank">${mp4Url}</a></p>
+            <video controls style="max-width:100%;height:auto;">
+              <source src="${mp4Url}" type="video/mp4">
+            </video>
+          `;
         })
         .catch(err => {
           document.body.innerText = "Error: " + err;
