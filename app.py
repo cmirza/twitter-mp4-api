@@ -16,8 +16,8 @@ except ImportError:
     limiter_available = False
 
 def is_valid_twitter_url(url):
-    """Strict validation for Twitter status URLs."""
-    pattern = r"^https?://(www\.)?twitter\.com/([A-Za-z0-9_]+)/status/(\d+)(\?.*)?$"
+    """Strict validation for X (formerly Twitter) status URLs."""
+    pattern = r"^https?://(www\.)?x\.com/([A-Za-z0-9_]+)/status/(\d+)(\?.*)?$"
     match = re.match(pattern, url)
     return bool(match)
 
