@@ -6,14 +6,28 @@ app = Flask(__name__)
 
 @app.route("/get-mp4", methods=["POST"])
 def get_mp4():
-    data = request.get_json()
-    tweet_url = data.get("url")
+    # Log raw incoming request
+    print("HEADERS:", dict(request.headers))
+    print("RAW BODY:", request.data)
+    data = request.get_json(silent=True)
+    print("JSON BODY:", data)
+
+    tweet_url = data.get("url") if data else None
 
     if not tweet_url:
-        return "Missing 'url'", 400
+        return "Missing or invalid 'url'", 400
 
     try:
-        result = subprocess.run(["yt-dlp", "-j", tweet_url], capture_output=True, text=True, timeout=20)
+        result = subprocess.run(
+            ["yt-dlp", "-j", tweet_url],
+            capture_output=True,
+            text=True,
+            timeout=20
+        )
+
+        print("STDOUT:", result.stdout)
+        print("STDERR:", result.stderr)
+
         video_data = json.loads(result.stdout)
 
         http_formats = [f for f in video_data["formats"] if f["format_id"].startswith("http-")]

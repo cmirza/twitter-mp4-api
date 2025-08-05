@@ -4,6 +4,10 @@ RUN apt-get update && apt-get install -y ffmpeg curl && \
     pip install yt-dlp Flask && \
     apt-get clean
 
-COPY app.py /app.py
+WORKDIR /app
+COPY . /app
 
-CMD ["python", "/app.py"]
+# Optional but explicit:
+COPY templates/ templates/
+
+CMD ["python", "app.py"]
