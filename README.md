@@ -2,6 +2,8 @@
 
 A simple Flask-based API to extract direct MP4 video links from Twitter posts using `yt-dlp`. Includes a minimal web UI for fetching and previewing videos.
 
+Twitter doesn't give video previews in apps like Messages, which makes it difficult to share memes with non Twitter users. Extracting video URLs works around that.
+
 ## Features
 
 - **API Endpoint**:  
