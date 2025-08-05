@@ -28,7 +28,9 @@ def get_mp4():
         print("STDOUT:", result.stdout)
         print("STDERR:", result.stderr)
 
-        video_data = json.loads(result.stdout)
+        # yt-dlp may output multiple JSON objects (one per line)
+        video_data_list = [json.loads(line) for line in result.stdout.splitlines() if line.strip()]
+        video_data = video_data_list[0]  # pick the first video (or adjust as needed)
 
         http_formats = [f for f in video_data["formats"] if f["format_id"].startswith("http-")]
         if not http_formats:
