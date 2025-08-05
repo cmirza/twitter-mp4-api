@@ -39,3 +39,21 @@ Twitter doesn't give video previews in apps like Messages, which makes it diffic
 - `requirements.txt` — Python dependencies
 - `Dockerfile` — Container setup
 - `fly.toml` — Fly.io deployment config
+
+## Changelog
+
+### 2025-08-04
+- Project created: initial version with Flask API and minimal web UI.
+- Added `/get-mp4` endpoint to extract MP4 links from Twitter using yt-dlp.
+- Basic HTML UI for fetching and previewing videos.
+- Dockerfile and requirements for deployment.
+
+### 2025-08-05
+- Refactored `app.py` for better code structure and maintainability.
+- Added strict Twitter URL validation and improved input sanitization.
+- Improved error handling and user-friendly error messages (JSON responses, status codes).
+- Switched from print statements to Python logging for all diagnostics.
+- Added subprocess timeout and graceful handling of yt-dlp errors.
+- Added optional API rate limiting using Flask-Limiter (if installed).
+- Internal errors are now hidden from users in production responses.
+- Updated security and robustness of the API endpoint.
